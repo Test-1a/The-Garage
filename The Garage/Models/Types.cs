@@ -12,5 +12,7 @@ namespace The_Garage.Models
         public Vehicles Vehicle { get; set; }
 
         // This is my own branch
+
+        // Another comment
     }
 }
