@@ -15,5 +15,7 @@ namespace The_Garage.Data
         }
 
         public DbSet<The_Garage.Models.Vehicles> Vehicles { get; set; }
+
+        public DbSet<The_Garage.Models.Members> Members { get; set; }
     }
 }
