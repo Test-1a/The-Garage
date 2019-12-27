@@ -158,6 +158,35 @@ namespace The_Garage.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+        // Functionality of the receipt
+        public async Task<IActionResult> Receipt(int id)
+        {
+            var local_vehicle = await _context.Vehicles.FindAsync(id);
+
+            var endTime = DateTime.UtcNow;
+            var startTime = local_vehicle.TimeOfParking;
+            var totalTime = (endTime - startTime);
+
+            string formattedTime = $"{totalTime.Hours} hours and {totalTime.Minutes} minutes";
+
+            var calculatedPrice = (int)((totalTime.TotalMinutes / 60) * 100);
+
+            var price = $"{calculatedPrice} KR";
+
+            var local_model = new ReceiptViewModel
+            {
+                RegNr = local_vehicle.RegNr,
+                TimeOfParking = local_vehicle.TimeOfParking,
+                TimeOfUnParking = endTime,
+                TotalTime = formattedTime,
+                Price = price
+            };
+
+            return View(local_model);
+
+        }
+
+
         private bool VehiclesExists(int id)
         {
             return _context.Vehicles.Any(e => e.Id == id);

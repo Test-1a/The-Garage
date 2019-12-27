@@ -9,6 +9,7 @@ namespace The_Garage.Models
     {
         public int Id { get; set; }
         public string TypeOfVehicle { get; set; }
+
         public Vehicles Vehicle { get; set; }
     }
 }
