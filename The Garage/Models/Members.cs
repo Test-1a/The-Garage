@@ -11,6 +11,6 @@ namespace The_Garage.Models
         public string FirstName { get; set; }
         public string LastName { get; set; }
 
-        public Vehicles Vehicle { get; set; }
+        public ICollection<Vehicles> Vehicle { get; set; }
     }
 }
