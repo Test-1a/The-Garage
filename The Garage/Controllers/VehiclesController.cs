@@ -197,7 +197,7 @@ namespace The_Garage.Controllers
             var model = await _context.Vehicles
                 .Include(t => t.Type)
                 .Include(t=>t.Member)
-                .Select(t => new DetialViewModel
+                .Select(t => new DetailViewModel
                 {
                     RegNr = t.RegNr,
                     TimeOfParking = t.TimeOfParking,
