@@ -32,12 +32,15 @@
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.RegNr)
-            </td>            
-            <td>
-                @Html.DisplayFor(modelItem => item.Type.Id)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Member.Id)
+                @Html.DisplayFor(modelItem => item.TimeOfParking)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Type.TypeOfVehicle)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Member.FirstName)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |

@@ -7,7 +7,7 @@
 <h1>AllVehiclesDetailsView</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create">Park A Vehicle</a>
 </p>
 <table class="table">
     <thead>
@@ -29,13 +29,7 @@
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Brand)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.TypeId)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.MemberId)
-            </th>
+            </th>            
             <th>
                 @Html.DisplayNameFor(model => model.Type)
             </th>
@@ -65,12 +59,6 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Brand)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.TypeId)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.MemberId)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Type)
