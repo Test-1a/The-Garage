@@ -55,7 +55,7 @@ namespace The_Garage
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                    pattern: "{controller=Vehicles}/{action=Index}/{id?}");
             });
         }
     }

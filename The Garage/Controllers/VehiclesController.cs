@@ -191,5 +191,27 @@ namespace The_Garage.Controllers
         {
             return _context.Vehicles.Any(e => e.Id == id);
         }
+
+        public async Task<IActionResult> DetailsView()
+        {
+            var model = await _context.Vehicles
+                .Include(t => t.Type)
+                .Include(t=>t.Member)
+                .Select(t => new DetialViewModel
+                {
+                    RegNr = t.RegNr,
+                    TimeOfParking = t.TimeOfParking,
+                    Member = t.Member.FirstName+" "+t.Member.LastName,
+                    Type = t.Type.TypeOfVehicle,
+                    NumnOfWheels = t.NumnOfWheels,
+                    Color = t.Color,
+                    Brand= t.Brand,
+                    ModelOfVehicle = t.Model
+
+                })
+                .ToListAsync();
+
+            return View(model);
+        }
     }
 }
