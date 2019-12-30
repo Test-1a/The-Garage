@@ -158,7 +158,18 @@ namespace The_Garage.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        // Functionality of the receipt
+        // GET: Vehicles/Search
+
+        public async Task<IActionResult> Search(string regnr)
+        {
+            var model = string.IsNullOrWhiteSpace(regnr) ?
+                await _context.Vehicles.ToListAsync() :
+                await _context.Vehicles.Where(v => v.RegNr == regnr).ToListAsync();
+
+            return View(nameof(Index), model);
+        }
+
+        // GET: Vehicles/Receipt
         public async Task<IActionResult> Receipt(int id)
         {
             var local_vehicle = await _context.Vehicles.FindAsync(id);
