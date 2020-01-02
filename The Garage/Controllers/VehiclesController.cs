@@ -163,12 +163,18 @@ namespace The_Garage.Controllers
         }
 
         // GET: Vehicles/Search
-
-        public async Task<IActionResult> Search(string regnr)
+        public async Task<IActionResult> Search(string term)
         {
-            var model = string.IsNullOrWhiteSpace(regnr) ?
-                await _context.Vehicles.ToListAsync() :
-                await _context.Vehicles.Where(v => v.RegNr == regnr).ToListAsync();
+            var model = await _context.Vehicles
+                .Where(v => v.RegNr.Contains(term) || v.Type.TypeOfVehicle.Contains(term))
+                .Include(v => v.Member)
+                .Include(v => v.Type)
+                .ToListAsync();
+
+            if (string.IsNullOrWhiteSpace(term) || model.Count.Equals(0))
+            {
+                ViewBag.Message = "You didn't enter a search term or nothing was found. Please try again!";
+            }
 
             return View(nameof(Index), model);
         }
@@ -182,7 +188,7 @@ namespace The_Garage.Controllers
             var startTime = local_vehicle.TimeOfParking;
             var totalTime = (endTime - startTime);
 
-            string formattedTime = $"{totalTime.Hours} hours and {totalTime.Minutes} minutes";
+            string formattedTime = $"{totalTime.Days} days and {totalTime.Hours} hours and {totalTime.Minutes} minutes";
 
             var calculatedPrice = (int)((totalTime.TotalMinutes / 60) * 100);
 
@@ -211,16 +217,16 @@ namespace The_Garage.Controllers
         {
             var model = await _context.Vehicles
                 .Include(t => t.Type)
-                .Include(t=>t.Member)
+                .Include(t => t.Member)
                 .Select(t => new DetailViewModel
                 {
                     RegNr = t.RegNr,
                     TimeOfParking = t.TimeOfParking,
-                    Member = t.Member.FirstName+" "+t.Member.LastName,
+                    Member = t.Member.FirstName + " " + t.Member.LastName,
                     Type = t.Type.TypeOfVehicle,
                     NumnOfWheels = t.NumnOfWheels,
                     Color = t.Color,
-                    Brand= t.Brand,
+                    Brand = t.Brand,
                     ModelOfVehicle = t.Model
 
                 })
