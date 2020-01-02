@@ -50,7 +50,9 @@ namespace The_Garage.Controllers
         public IActionResult Create()
         {
             ViewData["MemberId"] = new SelectList(_context.Set<Members>(), "Id", "Id");
+            ViewData["FirstName"] = new SelectList(_context.Set<Members>(), "FirstName", "FirstName");
             ViewData["TypeId"] = new SelectList(_context.Set<Types>(), "Id", "Id");
+            ViewData["TypeOfVehicle"] = new SelectList(_context.Set<Types>(), "TypeOfVehicle", "TypeOfVehicle");
             return View();
         }
 
@@ -68,7 +70,9 @@ namespace The_Garage.Controllers
                 return RedirectToAction(nameof(Index));
             }
             ViewData["MemberId"] = new SelectList(_context.Set<Members>(), "Id", "Id", vehicles.MemberId);
+            ViewData["FirstName"] = new SelectList(_context.Set<Members>(), "FirstName", "FirstName", vehicles.Member.FirstName);
             ViewData["TypeId"] = new SelectList(_context.Set<Types>(), "Id", "Id", vehicles.TypeId);
+            ViewData["TypeOfVehicle"] = new SelectList(_context.Set<Types>(), "TypeOfVehicle", "TypeOfVehicle", vehicles.Type.TypeOfVehicle);
             return View(vehicles);
         }
 
@@ -128,7 +132,7 @@ namespace The_Garage.Controllers
         }
 
         // GET: Vehicles/Delete/5
-        public async Task<IActionResult> Delete(int? id)
+        public async Task<IActionResult> Unpark(int? id)
         {
             if (id == null)
             {
