@@ -47,7 +47,7 @@ namespace The_Garage.Controllers
         }
 
         // GET: Vehicles/Create
-        public IActionResult Create()
+        public IActionResult Park()
         {
             ViewData["MemberId"] = new SelectList(_context.Set<Members>(), "Id", "Id");
             ViewData["FirstName"] = new SelectList(_context.Set<Members>(), "FirstName", "FirstName");
@@ -61,7 +61,7 @@ namespace The_Garage.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,RegNr,TimeOfParking,NumnOfWheels,Color,Model,Brand,TypeId,MemberId")] Vehicles vehicles)
+        public async Task<IActionResult> Park([Bind("Id,RegNr,TimeOfParking,NumnOfWheels,Color,Model,Brand,TypeId,MemberId")] Vehicles vehicles)
         {
             if (ModelState.IsValid)
             {
