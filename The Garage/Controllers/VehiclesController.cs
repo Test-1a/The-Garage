@@ -130,7 +130,7 @@ namespace The_Garage.Controllers
             ViewData["TypeId"] = new SelectList(_context.Set<Types>(), "Id", "Id", vehicles.TypeId);
             return View(vehicles);
         }
-
+//*********************************************************************************************************************
         // GET: Vehicles/Delete/5
         public async Task<IActionResult> Unpark(int? id)
         {
@@ -147,14 +147,40 @@ namespace The_Garage.Controllers
             {
                 return NotFound();
             }
+            var local_vehicle = await _context.Vehicles.FindAsync(id);
+            var endTime = DateTime.UtcNow;
+            var startTime = local_vehicle.TimeOfParking;
+            var totalTime = (endTime - startTime);
 
-            return View(vehicles);
+            string formattedTime = $"{totalTime.Days} days and {totalTime.Hours} hours and {totalTime.Minutes} minutes";
+
+            var calculatedPrice = (int)((totalTime.TotalMinutes / 60) * 100);
+
+            var price = $"{calculatedPrice} KR";
+
+            var local_model = new ReceiptViewModel
+            {
+                RegNr = local_vehicle.RegNr,
+                TimeOfParking = local_vehicle.TimeOfParking,
+                TimeOfUnParking = endTime,
+                NumnOfWheels=local_vehicle.NumnOfWheels,
+                Color=local_vehicle.Color,
+                Model=local_vehicle.Model,
+                Brand=local_vehicle.Brand,
+                TotalTime = formattedTime,
+                Price = price,
+                Member=local_vehicle.Member.FirstName,
+                Type =local_vehicle.Type.TypeOfVehicle,
+                unparkid=local_vehicle.Id
+            };
+
+            return View(nameof(Unpark),local_model);
         }
-
+        //************************************************************************************************
         // POST: Vehicles/Delete/5
-        [HttpPost, ActionName("Delete")]
+        [HttpPost, ActionName("Unpark")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
+        public async Task<IActionResult> UnparkConfirmed(int id)
         {
             var vehicles = await _context.Vehicles.FindAsync(id);
             _context.Vehicles.Remove(vehicles);

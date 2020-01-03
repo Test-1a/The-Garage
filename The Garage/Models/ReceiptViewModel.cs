@@ -22,5 +22,20 @@ namespace The_Garage.Models
 
         [Display(Name = "Total Price (100KR per hour)")]
         public string Price { get; set; }
+        public int NumnOfWheels { get; set; }
+
+        public string Color { get; set; }
+
+        [Display(Name = "Model of Vehicle")]
+        public string Model { get; set; }
+
+        [Display(Name = "Brand of Vehicle")]
+        public string Brand { get; set; }
+
+        public string Type { get; set; }
+        public string Member { get; set; }
+
+        public int unparkid { get; set; }
+
     }
 }
