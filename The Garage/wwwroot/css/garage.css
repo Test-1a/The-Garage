@@ -1,0 +1,21 @@
+﻿body {
+    background-image: url('../img/bg.jfif');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+}
+
+header {
+    background: #ffffffad;
+}
+
+th,
+table {
+    background-color: rgba(212, 212, 212, 0.61);
+}
+
+footer {
+    background: #0000009c;
+}
+
+
