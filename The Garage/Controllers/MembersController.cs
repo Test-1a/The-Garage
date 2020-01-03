@@ -164,13 +164,22 @@ namespace The_Garage.Controllers
 
         public async Task<IActionResult> Search(string firstname, string lastname)
         {
+            if(firstname == null || lastname == null)
+            {
+                //return NotFound();
+                //return View(nameof(NotComplete));
+                return RedirectToAction(nameof(NotComplete));
+
+            }
+
             var member = await _context.Members
  //               .Include(m => m.Vehicle)
                 .FirstOrDefaultAsync(m => m.FirstName == firstname && m.LastName == lastname);
 
             if(member == null)
             {
-                return NotFound();
+                //return NotFound();
+                return RedirectToAction(nameof(MemberNotFound));
             }
 
             var model = new MemberDetailsViewModel();
@@ -183,6 +192,16 @@ namespace The_Garage.Controllers
 
 
             return View(nameof(Search), model);
+        }
+
+        public ViewResult NotComplete()
+        {
+            return View(nameof(NotComplete));
+        }
+
+        public ViewResult MemberNotFound()
+        {
+            return View(nameof(MemberNotFound));
         }
     }
 }

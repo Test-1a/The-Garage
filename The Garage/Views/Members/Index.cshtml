@@ -6,10 +6,15 @@
 
 <h1>Members</h1>
 
+<h5>Search for a member</h5>
+
 <form asp-controller="Members" asp-action="Search" method="get">
-    <input type="text" class="form-control" name="firstname" placeholder="firstname" />
-    <input type="text" class="form-control" name="lastname" placeholder="lastname" />
-    <input type="submit" class="btn btn-info btn-sm" />
+    <input type="text" class="form-control" name="firstname" placeholder="Firstname" />
+    <input type="text" class="form-control" name="lastname" placeholder="Lastname" />
+    @*<input type="submit" class="btn btn-info btn-sm" />*@
+    <div class="input-group-append">
+        <button type="submit" class="btn btn-primary"><i class="fa fa-search">Search</i></button>
+    </div>
 </form>
 
 <p>
