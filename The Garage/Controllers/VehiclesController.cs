@@ -170,16 +170,17 @@ namespace The_Garage.Controllers
                 TotalTime = formattedTime,
                 Price = price,
                 Member=local_vehicle.Member.FirstName,
-                Type =local_vehicle.Type.TypeOfVehicle
+                Type =local_vehicle.Type.TypeOfVehicle,
+                unparkid=local_vehicle.Id
             };
 
             return View(nameof(Unpark),local_model);
         }
         //************************************************************************************************
         // POST: Vehicles/Delete/5
-        [HttpPost, ActionName("Delete")]
+        [HttpPost, ActionName("Unpark")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
+        public async Task<IActionResult> UnparkConfirmed(int id)
         {
             var vehicles = await _context.Vehicles.FindAsync(id);
             _context.Vehicles.Remove(vehicles);

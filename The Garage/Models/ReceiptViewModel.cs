@@ -35,5 +35,7 @@ namespace The_Garage.Models
         public string Type { get; set; }
         public string Member { get; set; }
 
+        public int unparkid { get; set; }
+
     }
 }
