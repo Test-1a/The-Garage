@@ -34,13 +34,23 @@ namespace The_Garage.Controllers
             }
 
             var members = await _context.Members
+                .Include(m => m.Vehicle)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (members == null)
             {
                 return NotFound();
             }
 
-            return View(members);
+            var model = new MemberDetailsViewModel();
+            model.Id = members.Id;
+            model.FirstName = members.FirstName;
+            model.LastName = members.LastName;
+            model.NumberOfVehicles = _context.Vehicles.Count(v => v.MemberId == members.Id);
+            //            model.Count = member.Vehicle.Count;
+            model.TheVehicles = _context.Vehicles.Where(v => v.MemberId == members.Id);
+
+            //return View(members);
+            return View(model);
         }
 
         // GET: Members/Create
@@ -148,6 +158,31 @@ namespace The_Garage.Controllers
         private bool MembersExists(int id)
         {
             return _context.Members.Any(e => e.Id == id);
+        }
+
+        
+
+        public async Task<IActionResult> Search(string firstname, string lastname)
+        {
+            var member = await _context.Members
+ //               .Include(m => m.Vehicle)
+                .FirstOrDefaultAsync(m => m.FirstName == firstname && m.LastName == lastname);
+
+            if(member == null)
+            {
+                return NotFound();
+            }
+
+            var model = new MemberDetailsViewModel();
+            model.Id = member.Id;
+            model.FirstName = member.FirstName;
+            model.LastName = member.LastName;
+            model.NumberOfVehicles = _context.Vehicles.Count(v => v.MemberId == member.Id);
+            //            model.Count = member.Vehicle.Count;
+            model.TheVehicles = _context.Vehicles.Where(v => v.MemberId == member.Id);
+
+
+            return View(nameof(Search), model);
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿@model The_Garage.Models.Members
+﻿@*@model The_Garage.Models.Members*@
+@model The_Garage.Models.MemberDetailsViewModel
 
 @{
     ViewData["Title"] = "Details";
@@ -10,19 +11,64 @@
     <h4>Members</h4>
     <hr />
     <dl class="row">
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.FirstName)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.FirstName)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.LastName)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.LastName)
         </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.NumberOfVehicles)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.NumberOfVehicles)
+        </dd>
     </dl>
+
+    <table>
+        <thead>
+
+            <tr>
+                <th>
+                    @*@Html.DisplayNameFor(model => model.FirstName)*@
+                    <h6><strong>Brand</strong></h6>
+                </th>
+                <th>
+                    @*@Html.DisplayNameFor(model => model.LastName)*@
+                    <h6><strong>Registration number</strong></h6>
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.TheVehicles)
+            {
+                @*<ul>
+                    <li>
+                        @Html.DisplayFor(modelItem => item.Brand)
+                    </li>
+                    <li>
+                        @Html.DisplayFor(modelItem => item.RegNr)
+                    </li>
+                </ul>*@
+
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Brand)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.RegNr)
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
 </div>
 <div>
     <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
