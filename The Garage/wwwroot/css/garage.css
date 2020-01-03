@@ -6,7 +6,7 @@
 }
 
 header {
-    background: #ffffffad;
+    background-color: rgba(255, 255, 255, 0.5);
 }
 
 th,
@@ -15,7 +15,7 @@ table {
 }
 
 footer {
-    background: #0000009c;
+    background-color: rgba(0, 0, 0, 0.5);
 }
 
 
